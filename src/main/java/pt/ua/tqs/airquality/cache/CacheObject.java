@@ -1,4 +1,4 @@
-package pt.ua.tqs.airquality.airquality.cache;
+package pt.ua.tqs.airquality.cache;
 
 public class CacheObject {
     private Long lastAccess = System.currentTimeMillis();

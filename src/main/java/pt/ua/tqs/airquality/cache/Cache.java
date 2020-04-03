@@ -1,4 +1,4 @@
-package pt.ua.tqs.airquality.airquality.cache;
+package pt.ua.tqs.airquality.cache;
 
 import java.util.ArrayList;
 import java.util.HashMap;

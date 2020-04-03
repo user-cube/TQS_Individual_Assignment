@@ -1,4 +1,4 @@
-package pt.ua.tqs.airquality.airquality;
+package pt.ua.tqs.airquality;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

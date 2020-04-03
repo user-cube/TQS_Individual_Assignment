@@ -12,7 +12,7 @@
     <artifactId>airquality</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>airquality</name>
-    <description>Develop a multi-layer web application, in Spring Boot, supplied with automated tests.</description>
+    <description>A multi-layer web application, in Spring Boot, supplied with automated tests.</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -40,6 +40,18 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
