@@ -3,7 +3,6 @@ package pt.ua.tqs.airquality.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.javatuples.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pt.ua.tqs.airquality.entities.CitiesCoordinates;
-import pt.ua.tqs.airquality.entities.CitiesNames;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.String.join;
 
 @RestController
 @RequestMapping("/coordinates")
@@ -42,11 +39,9 @@ public class CoordinatesController {
     @ApiOperation(value = "Get latitude and longitude by city.", response = Iterable.class)
     @GetMapping(value = "/{city}")
     public ResponseEntity coordinatesByCity(@PathVariable("city") String city){
-        System.out.println(city);
         Map<String, String> coordinates = new HashMap<>();
         try {
             String cityName = city.toUpperCase().replaceAll("\\s", "");
-            System.out.println(cityName);
             String latitude = CitiesCoordinates.valueOf(cityName + "_LAT").toString();
             String longitude = CitiesCoordinates.valueOf(cityName + "_LONG").toString();
             coordinates.put("latitude", latitude);

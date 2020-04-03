@@ -3,13 +3,16 @@ package pt.ua.tqs.airquality.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pt.ua.tqs.airquality.entities.CitiesCoordinates;
 import pt.ua.tqs.airquality.entities.CitiesNames;
+import pt.ua.tqs.airquality.services.CacheService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/cities")
 public class CityController {
+
+    @Autowired private CacheService cacheService;
 
     @ApiOperation(value = "List all available cities.", response = Iterable.class)
     @ApiResponses(value = {
@@ -34,5 +39,14 @@ public class CityController {
             cities.add(city.toString());
         }
         return ResponseEntity.status(HttpStatus.OK).body(cities);
+    }
+
+    @GetMapping(value="/{city}")
+    public ResponseEntity getAirConditions(@PathVariable("city") String city){
+        String cityName = city.toUpperCase().replaceAll("\\s", "");
+        String latitude = CitiesCoordinates.valueOf(cityName + "_LAT").toString();
+        String longitude = CitiesCoordinates.valueOf(cityName + "_LONG").toString();
+
+        return ResponseEntity.status(HttpStatus.OK).body(cacheService.getAirConditions(latitude, longitude, city));
     }
 }
