@@ -1,13 +1,13 @@
-package pt.ua.tqs.weatherapi.weatherapi;
+package pt.ua.tqs.airquality.airquality;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApplicationMain {
+public class AirQualityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationMain.class, args);
+        SpringApplication.run(AirQualityApplication.class, args);
     }
 
 }

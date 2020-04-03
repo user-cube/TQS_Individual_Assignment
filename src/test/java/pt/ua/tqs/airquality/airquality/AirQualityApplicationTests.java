@@ -1,10 +1,10 @@
-package pt.ua.tqs.weatherapi.weatherapi;
+package pt.ua.tqs.airquality.airquality;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WeatherapiApplicationTests {
+class AirQualityApplicationTests {
 
     @Test
     void contextLoads() {

@@ -8,11 +8,11 @@
         <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>pt.ua.tqs.weatherapi</groupId>
-    <artifactId>weatherapi</artifactId>
+    <groupId>pt.ua.tqs.airquality</groupId>
+    <artifactId>airquality</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>weatherapi</name>
-    <description>Mid-term assignment</description>
+    <name>airquality</name>
+    <description>Develop a multi-layer web application, in Spring Boot, supplied with automated tests.</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
