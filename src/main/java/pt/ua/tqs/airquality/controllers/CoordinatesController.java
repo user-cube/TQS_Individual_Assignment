@@ -3,21 +3,23 @@ package pt.ua.tqs.airquality.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.javatuples.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pt.ua.tqs.airquality.entities.CitiesCoordinates;
 import pt.ua.tqs.airquality.entities.CitiesNames;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 @RestController
-@RequestMapping("/cities")
-public class CityController {
-
-    @ApiOperation(value = "List all available cities.", response = Iterable.class)
+@RequestMapping("/coordinates")
+public class CoordinatesController {
+    @ApiOperation(value = "List all coordinates.", response = Iterable.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -26,11 +28,21 @@ public class CityController {
     }
     )
     @GetMapping(value = "/")
-    public List listAllCities(){
+    public List listAllCoordinates(){
         List cities = new ArrayList();
-        for (CitiesNames city: CitiesNames.values()) {
+        for (CitiesCoordinates city: CitiesCoordinates.values()) {
             cities.add(city.toString());
         }
         return cities;
+    }
+
+    @GetMapping(value = "/{city}")
+    public Map coordinatesByCity(@PathVariable("city") String city){
+        Map<String, String> coordinates = new HashMap<>();
+        String latitude = CitiesCoordinates.valueOf(city.toUpperCase()+"_LAT").toString();
+        String longitude = CitiesCoordinates.valueOf(city.toUpperCase()+"_LONG").toString();
+        coordinates.put("latitude", latitude);
+        coordinates.put("longitude", longitude);
+        return coordinates;
     }
 }

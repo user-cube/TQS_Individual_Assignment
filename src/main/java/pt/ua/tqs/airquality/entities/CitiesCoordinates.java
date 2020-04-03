@@ -1,6 +1,6 @@
 package pt.ua.tqs.airquality.entities;
 
-public enum Cities {
+public enum CitiesCoordinates {
     AVEIRO_LAT("40.6405"),
     AVEIRO_LONG("8.6538"),
     BEJA_LAT("38.0153"),
@@ -53,7 +53,12 @@ public enum Cities {
 
     public final String label;
 
-    private Cities(String label) {
+    CitiesCoordinates(String label) {
         this.label = label;
+    }
+
+    @Override
+    public String toString(){
+        return label;
     }
 }
