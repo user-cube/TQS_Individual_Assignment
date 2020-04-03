@@ -3,6 +3,8 @@ package pt.ua.tqs.airquality.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,11 +28,11 @@ public class CityController {
     }
     )
     @GetMapping(value = "/")
-    public List listAllCities(){
+    public ResponseEntity listAllCities(){
         List cities = new ArrayList();
         for (CitiesNames city: CitiesNames.values()) {
             cities.add(city.toString());
         }
-        return cities;
+        return ResponseEntity.status(HttpStatus.OK).body(cities);
     }
 }
