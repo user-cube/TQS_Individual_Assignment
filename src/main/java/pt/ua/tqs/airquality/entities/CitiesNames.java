@@ -24,9 +24,7 @@ public enum CitiesNames {
     PPPP("Ponta Delgada"),
     AA("Angra do Heroísmo"),
     H("Horta"),
-    SCF("Santa Cruz das Flores"),
-
-    ;
+    SCF("Santa Cruz das Flores");
 
     public final String label;
 
@@ -35,7 +33,7 @@ public enum CitiesNames {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return label;
     }
 }

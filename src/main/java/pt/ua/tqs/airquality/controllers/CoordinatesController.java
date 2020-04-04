@@ -29,16 +29,17 @@ public class CoordinatesController {
     }
     )
     @GetMapping(value = "/")
-    public ResponseEntity listAllCoordinates(){
+    public ResponseEntity listAllCoordinates() {
         List cities = new ArrayList();
-        for (CitiesCoordinates city: CitiesCoordinates.values()) {
+        for (CitiesCoordinates city : CitiesCoordinates.values()) {
             cities.add(city.toString());
         }
         return ResponseEntity.status(HttpStatus.OK).body(cities);
     }
+
     @ApiOperation(value = "Get latitude and longitude by city.", response = Iterable.class)
     @GetMapping(value = "/{city}")
-    public ResponseEntity coordinatesByCity(@PathVariable("city") String city){
+    public ResponseEntity coordinatesByCity(@PathVariable("city") String city) {
         Map<String, String> coordinates = new HashMap<>();
         try {
             String cityName = city.toUpperCase().replaceAll("\\s", "");
@@ -46,7 +47,7 @@ public class CoordinatesController {
             String longitude = CitiesCoordinates.valueOf(cityName + "_LONG").toString();
             coordinates.put("latitude", latitude);
             coordinates.put("longitude", longitude);
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Nothing to show.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(coordinates);

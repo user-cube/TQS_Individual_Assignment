@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiResponses;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,11 @@ import java.util.*;
 @RequestMapping("/cities")
 public class CityController {
 
-    @Autowired private CacheService cacheService;
+    private final CacheService cacheService;
+
+    public CityController(CacheService cacheService) {
+        this.cacheService = cacheService;
+    }
 
     @ApiOperation(value = "List all available cities.", response = Iterable.class)
     @ApiResponses(value = {

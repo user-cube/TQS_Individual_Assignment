@@ -58,7 +58,7 @@ public enum CitiesCoordinates {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return label;
     }
 }

@@ -8,10 +8,6 @@ public class CacheObject {
         this.value = value;
     }
 
-    public Long getLastAccess() {
-        return lastAccess;
-    }
-
     public void setLastAccess(Long lastAccess) {
         this.lastAccess = lastAccess;
     }
