@@ -16,4 +16,7 @@ public class CacheObject {
         return value;
     }
 
+    public Long getLastAccess() {
+        return lastAccess;
+    }
 }
