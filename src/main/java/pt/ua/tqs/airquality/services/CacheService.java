@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.ua.tqs.airquality.cache.Cache;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-
 @Service
 public class CacheService {
     private Cache cache;
@@ -22,26 +19,11 @@ public class CacheService {
         return this.cache;
     }
 
-    public LinkedHashMap getAirConditions(String latitude, String longitude, String city) {
-        LinkedHashMap cached;
-        LinkedHashMap toCache;
-
-        System.out.println(this.cache.get(city));
-
-        if (this.cache.containsKey(city)){
-            try{
-                cached = (LinkedHashMap) this.cache.get(city);
-            } catch (Exception e){
-                toCache = breezometerService.getAirConditions(latitude, longitude);
-                this.cache.put(city, toCache);
-                return toCache;
-            }
-        } else {
-            toCache = breezometerService.getAirConditions(latitude, longitude);
-            this.cache.put(city, toCache);
-            return toCache;
+    public String getAirConditions(String latitude, String longitude, String city) {
+        if (!cache.containsKey(city)){
+            cache.put(city, breezometerService.getAirConditions(latitude, longitude));
         }
-        return cached;
+        return cache.get(city).toString();
     }
 
 }

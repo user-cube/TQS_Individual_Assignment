@@ -3,6 +3,9 @@ package pt.ua.tqs.airquality.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +17,7 @@ import pt.ua.tqs.airquality.entities.CitiesCoordinates;
 import pt.ua.tqs.airquality.entities.CitiesNames;
 import pt.ua.tqs.airquality.services.CacheService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -46,7 +48,13 @@ public class CityController {
         String cityName = city.toUpperCase().replaceAll("\\s", "");
         String latitude = CitiesCoordinates.valueOf(cityName + "_LAT").toString();
         String longitude = CitiesCoordinates.valueOf(cityName + "_LONG").toString();
-
-        return ResponseEntity.status(HttpStatus.OK).body(cacheService.getAirConditions(latitude, longitude, city));
+        JSONObject json = null;
+        String data = cacheService.getAirConditions(latitude, longitude, city);
+        try {
+            json = (JSONObject) new JSONParser().parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(json);
     }
 }
