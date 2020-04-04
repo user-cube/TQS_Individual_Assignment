@@ -4,17 +4,11 @@ import java.util.HashMap;
 
 public class Cache<K, T> {
 
-    private Long cacheTimeToLive;
-    private CacheObject cacheObject;
     private HashMap<K, T> cacheMap;
 
     public Cache(long timeToLive, final long timeInterval, int max) {
-        this.cacheTimeToLive = timeToLive * 2000;
-
         cacheMap = new HashMap<>(max);
-
         if (timeToLive > 0 && timeInterval > 0) {
-
             Thread t = new Thread(() -> {
                 while (true) {
                     try {
@@ -25,7 +19,6 @@ public class Cache<K, T> {
 
                 }
             });
-
             t.setDaemon(true);
             t.start();
         }
@@ -39,7 +32,7 @@ public class Cache<K, T> {
 
     public T get(K key) {
         synchronized (cacheMap) {
-            cacheObject = new CacheObject(cacheMap.get(key).toString());
+            CacheObject cacheObject = new CacheObject(cacheMap.get(key).toString());
 
             if (cacheObject.getValue() != null) {
                 cacheObject.setLastAccess(System.currentTimeMillis());
