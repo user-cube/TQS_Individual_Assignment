@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
-import pt.ua.tqs.airquality.services.BreezometerService;
+import pt.ua.tqs.airquality.services.BreezoMeterService;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +17,7 @@ public class ProcessJSON {
         try {
             json = (JSONObject) new JSONParser().parse(data);
         } catch (ParseException exception) {
-            Logger.getLogger(BreezometerService.class.getName()).log(Level.SEVERE, null, exception);
+            Logger.getLogger(BreezoMeterService.class.getName()).log(Level.SEVERE, null, exception);
             return null;
         }
         return json;

@@ -10,30 +10,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pt.ua.tqs.airquality.entities.CitiesNames;
 import pt.ua.tqs.airquality.services.CacheService;
 import pt.ua.tqs.airquality.tools.GetCity;
 import pt.ua.tqs.airquality.tools.ProcessJSON;
 
-import java.util.*;
-
-
 @RestController
-@RequestMapping("/cities")
-public class CityController {
+@RequestMapping("/forecast")
+public class ForecastController {
 
     private final CacheService cacheService;
     private GetCity getCity;
     private JSONObject json;
     private ProcessJSON processJSON;
 
-    public CityController(CacheService cacheService, GetCity getCity, ProcessJSON processJSON) {
+    public ForecastController(CacheService cacheService, GetCity getCity, ProcessJSON processJSON) {
         this.cacheService = cacheService;
         this.getCity = getCity;
         this.processJSON = processJSON;
     }
 
-    @ApiOperation(value = "List all available cities.", response = Iterable.class)
+    @ApiOperation(value = ".", response = Iterable.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -41,32 +37,13 @@ public class CityController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @GetMapping(value = "/")
-    public ResponseEntity listAllCities(){
-        List cities = new ArrayList();
-        for (CitiesNames city: CitiesNames.values()) {
-            cities.add(city.toString());
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(cities);
-    }
-
     @GetMapping(value="/{city}")
     public ResponseEntity getAirConditions(@PathVariable("city") String city){
-        String cityName = city.toUpperCase().replaceAll("\\s", "");
-
-        String [] coordinates = getCity.coordinatesFromName(cityName);
-
-        if ( coordinates == null){
+        String data = cacheService.getForecast(city);
+        if ( data == null){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-
-        String data = cacheService.getAirConditions(coordinates[0], coordinates[1], city);
         json = processJSON.processJSON(data);
         return ResponseEntity.status(HttpStatus.OK).body(json);
-    }
-
-    @GetMapping(value="/{city}/local")
-    public ResponseEntity getLocalAqi(@PathVariable("city") String city){
-        return null;
     }
 }
