@@ -21,4 +21,11 @@ public class CacheService {
         return cache.get(city).toString();
     }
 
+    public String getLocalAqi(String latitude, String longitude, String city){
+        if (!cache.containsKey(city)){
+            cache.put(city + "AQI", breezometerService.getLocalAqi(latitude, longitude));
+        }
+        return cache.get(city).toString();
+    }
+
 }

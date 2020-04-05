@@ -22,4 +22,13 @@ public class BreezometerService {
         return data;
     }
 
+    public JSONObject getLocalAqi(String latitude, String longitude) {
+        JSONObject data = client
+                .target(baseURL + "lat=" + latitude + "&lon=" + longitude + "&key=e5c3a4bbfda4433eaaf91581c5a175e3&features=local_aqi")
+                .request(MediaType.APPLICATION_JSON)
+                .get(JSONObject.class);
+        return data;
+    }
+
+
 }

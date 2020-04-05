@@ -4,20 +4,16 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pt.ua.tqs.airquality.entities.CitiesCoordinates;
 import pt.ua.tqs.airquality.entities.CitiesNames;
-import pt.ua.tqs.airquality.services.BreezometerService;
 import pt.ua.tqs.airquality.services.CacheService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import pt.ua.tqs.airquality.tools.GetCity;
+import pt.ua.tqs.airquality.tools.ProcessJSON;
 
 import java.util.*;
 
@@ -27,9 +23,14 @@ import java.util.*;
 public class CityController {
 
     private final CacheService cacheService;
+    private GetCity getCity;
+    private JSONObject json;
+    private ProcessJSON processJSON;
 
-    public CityController(CacheService cacheService) {
+    public CityController(CacheService cacheService, GetCity getCity, ProcessJSON processJSON) {
         this.cacheService = cacheService;
+        this.getCity = getCity;
+        this.processJSON = processJSON;
     }
 
     @ApiOperation(value = "List all available cities.", response = Iterable.class)
@@ -52,25 +53,20 @@ public class CityController {
     @GetMapping(value="/{city}")
     public ResponseEntity getAirConditions(@PathVariable("city") String city){
         String cityName = city.toUpperCase().replaceAll("\\s", "");
-        String latitude = "";
-        String longitude = "";
 
-        try {
-            latitude = CitiesCoordinates.valueOf(cityName + "_LAT").toString();
-            longitude = CitiesCoordinates.valueOf(cityName + "_LONG").toString();
-        } catch (Exception exception){
-            Logger.getLogger(BreezometerService.class.getName()).log(Level.SEVERE, null, exception);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No content.");
+        String [] coordinates = getCity.coordinatesFromName(cityName);
+
+        if ( coordinates == null){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        JSONObject json;
-        String data = cacheService.getAirConditions(latitude, longitude, city);
-        try {
-            json = (JSONObject) new JSONParser().parse(data);
-        } catch (ParseException exception) {
-            Logger.getLogger(BreezometerService.class.getName()).log(Level.SEVERE, null, exception);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong.");
-        }
+        String data = cacheService.getAirConditions(coordinates[0], coordinates[1], city);
+        json = processJSON.processJSON(data);
         return ResponseEntity.status(HttpStatus.OK).body(json);
+    }
+
+    @GetMapping(value="/{city}/local")
+    public ResponseEntity getLocalAqi(@PathVariable("city") String city){
+        return null;
     }
 }
