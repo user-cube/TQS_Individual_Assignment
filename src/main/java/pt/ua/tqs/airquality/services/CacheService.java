@@ -10,7 +10,7 @@ public class CacheService {
     final BreezometerService breezometerService;
 
     public CacheService(BreezometerService breezometerService){
-        this.cache = new Cache(15,15,15);
+        this.cache = new Cache(20,20,15);
         this.breezometerService = breezometerService;
     }
 

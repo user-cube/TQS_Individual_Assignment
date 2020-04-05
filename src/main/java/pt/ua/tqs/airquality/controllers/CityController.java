@@ -63,7 +63,7 @@ public class CityController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No content.");
         }
 
-        JSONObject json = null;
+        JSONObject json;
         String data = cacheService.getAirConditions(latitude, longitude, city);
         try {
             json = (JSONObject) new JSONParser().parse(data);
