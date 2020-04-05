@@ -8,8 +8,8 @@ import pt.ua.tqs.airquality.cache.Cache;
 public class CacheService {
     private Cache cache;
 
-    final BreezoMeterService breezometerService;
-    final IPMAService ipmaService;
+    private final BreezoMeterService breezometerService;
+    private final IPMAService ipmaService;
 
     public CacheService(BreezoMeterService breezometerService, IPMAService ipmaService){
         this.cache = new Cache(20,20,15);

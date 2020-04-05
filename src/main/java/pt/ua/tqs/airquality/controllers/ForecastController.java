@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pt.ua.tqs.airquality.services.CacheService;
-import pt.ua.tqs.airquality.tools.GetCity;
+import pt.ua.tqs.airquality.tools.CityInfo;
 import pt.ua.tqs.airquality.tools.ProcessJSON;
 
 @RestController
@@ -19,13 +19,12 @@ import pt.ua.tqs.airquality.tools.ProcessJSON;
 public class ForecastController {
 
     private final CacheService cacheService;
-    private GetCity getCity;
-    private JSONObject json;
+    private CityInfo cityInfo;
     private ProcessJSON processJSON;
 
-    public ForecastController(CacheService cacheService, GetCity getCity, ProcessJSON processJSON) {
+    public ForecastController(CacheService cacheService, CityInfo cityInfo, ProcessJSON processJSON) {
         this.cacheService = cacheService;
-        this.getCity = getCity;
+        this.cityInfo = cityInfo;
         this.processJSON = processJSON;
     }
 
@@ -39,6 +38,7 @@ public class ForecastController {
     )
     @GetMapping(value="/{city}")
     public ResponseEntity getAirConditions(@PathVariable("city") String city){
+        JSONObject json;
         String data = cacheService.getForecast(city);
         if ( data == null){
             return new ResponseEntity(HttpStatus.NOT_FOUND);

@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class GetCity {
+public class CityInfo {
 
     private final Client client = ClientBuilder.newClient();
 
