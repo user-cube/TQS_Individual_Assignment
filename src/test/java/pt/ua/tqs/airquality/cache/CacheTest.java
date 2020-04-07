@@ -145,6 +145,7 @@ class CacheTest {
         cache.put("AVEIRO", "AVEIRO");
         TimeUnit.MILLISECONDS.sleep(20000);
         cache.cleanup();
+        TimeUnit.MILLISECONDS.sleep(20000);
         assertFalse(cache.containsKey("AVEIRO"));
         assertEquals(0, cache.size());
     }
