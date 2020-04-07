@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiResponses;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pt.ua.tqs.airquality.services.CacheService;
 import pt.ua.tqs.airquality.tools.CityInfo;
 import pt.ua.tqs.airquality.tools.ProcessJSON;
@@ -17,6 +14,7 @@ import pt.ua.tqs.airquality.tools.ProcessJSON;
 
 @RestController
 @RequestMapping("/airquality")
+@CrossOrigin(origins="*")
 public class AirQualityController {
 
     private final CacheService cacheService;

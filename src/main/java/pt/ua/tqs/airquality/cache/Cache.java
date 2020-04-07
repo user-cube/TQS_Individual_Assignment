@@ -9,15 +9,6 @@ public class Cache<K, T> {
     private long timeToLive;
     private LRUMap cacheMap;
 
-    protected class CrunchifyCacheObject {
-        public long lastAccessed = System.currentTimeMillis();
-        public T value;
-
-        protected CrunchifyCacheObject(T value) {
-            this.value = value;
-        }
-    }
-
     public Cache(long cacheTimeToLive, final long timerInterval, int maxItems) {
         this.timeToLive = cacheTimeToLive * 1000;
 
@@ -42,14 +33,14 @@ public class Cache<K, T> {
 
     public void put(K key, T value) {
         synchronized (cacheMap) {
-            cacheMap.put(key, new CrunchifyCacheObject(value));
+            cacheMap.put(key, new CacheObject(value));
         }
     }
 
     @SuppressWarnings("unchecked")
     public T get(K key) {
         synchronized (cacheMap) {
-            CrunchifyCacheObject c = (CrunchifyCacheObject) cacheMap.get(key);
+            CacheObject c = (CacheObject) cacheMap.get(key);
 
             if (c == null)
                 return null;
@@ -81,7 +72,6 @@ public class Cache<K, T> {
         return false;
     }
 
-
     public void cleanup() {
 
         long now = System.currentTimeMillis();
@@ -92,11 +82,11 @@ public class Cache<K, T> {
 
             deleteKey = new ArrayList<>((cacheMap.size() / 2) + 1);
             K key;
-            CrunchifyCacheObject c;
+            CacheObject c;
 
             while (itr.hasNext()) {
                 key = (K) itr.next();
-                c = (CrunchifyCacheObject) itr.getValue();
+                c = (CacheObject) itr.getValue();
 
                 if (c != null && (now > (timeToLive + c.lastAccessed))) {
                     deleteKey.add(key);
@@ -110,6 +100,15 @@ public class Cache<K, T> {
             }
 
             Thread.yield();
+        }
+    }
+
+    protected class CacheObject {
+        public long lastAccessed = System.currentTimeMillis();
+        public T value;
+
+        protected CacheObject(T value) {
+            this.value = value;
         }
     }
 }
