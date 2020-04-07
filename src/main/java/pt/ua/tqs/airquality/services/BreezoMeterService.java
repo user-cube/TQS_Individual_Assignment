@@ -19,7 +19,7 @@ public class BreezoMeterService {
                 .target(baseURL + "lat=" + latitude +
                         "&lon=" + longitude +
                         "&key=e5c3a4bbfda4433eaaf91581c5a175e3" +
-                        "&features=breezometer_aqi,local_aqi,health_recommendations,sources_and_effects," +
+                        "&features=breezometer_aqi,local_aqi," +
                         "pollutants_concentrations,pollutants_aqi_information")
                 .request(MediaType.APPLICATION_JSON)
                 .get(JSONObject.class);

@@ -1,0 +1,130 @@
+{
+  "metadata": null,
+  "data": {
+    "datetime": "2020-04-07T20:00:00Z",
+    "indexes": {
+      "prt_qualar": {
+        "aqi_display": null,
+        "color": "#00DD35",
+        "dominant_pollutant": "o3",
+        "aqi": null,
+        "display_name": "IQar (PT)",
+        "category": "Very good air quality"
+      },
+      "baqi": {
+        "aqi_display": "80",
+        "color": "#58BE35",
+        "dominant_pollutant": "o3",
+        "aqi": 80,
+        "display_name": "BreezoMeter AQI",
+        "category": "Excellent air quality"
+      }
+    },
+    "data_available": true,
+    "pollutants": {
+      "no2": {
+        "full_name": "Nitrogen dioxide",
+        "concentration": {
+          "units": "ppb",
+          "value": 8.73
+        },
+        "display_name": "NO2",
+        "aqi_information": {
+          "baqi": {
+            "aqi_display": "94",
+            "color": "#009E3A",
+            "aqi": 94,
+            "display_name": "BreezoMeter AQI",
+            "category": "Excellent air quality"
+          }
+        }
+      },
+      "o3": {
+        "full_name": "Ozone",
+        "concentration": {
+          "units": "ppb",
+          "value": 25.74
+        },
+        "display_name": "O3",
+        "aqi_information": {
+          "baqi": {
+            "aqi_display": "80",
+            "color": "#009E3A",
+            "aqi": 80,
+            "display_name": "BreezoMeter AQI",
+            "category": "Excellent air quality"
+          }
+        }
+      },
+      "pm25": {
+        "full_name": "Fine particulate matter (<2.5µm)",
+        "concentration": {
+          "units": "ug/m3",
+          "value": 7.94
+        },
+        "display_name": "PM2.5",
+        "aqi_information": {
+          "baqi": {
+            "aqi_display": "87",
+            "color": "#009E3A",
+            "aqi": 87,
+            "display_name": "BreezoMeter AQI",
+            "category": "Excellent air quality"
+          }
+        }
+      },
+      "so2": {
+        "full_name": "Sulfur dioxide",
+        "concentration": {
+          "units": "ppb",
+          "value": 0.12
+        },
+        "display_name": "SO2",
+        "aqi_information": {
+          "baqi": {
+            "aqi_display": "100",
+            "color": "#009E3A",
+            "aqi": 100,
+            "display_name": "BreezoMeter AQI",
+            "category": "Excellent air quality"
+          }
+        }
+      },
+      "pm10": {
+        "full_name": "Inhalable particulate matter (<10µm)",
+        "concentration": {
+          "units": "ug/m3",
+          "value": 11.17
+        },
+        "display_name": "PM10",
+        "aqi_information": {
+          "baqi": {
+            "aqi_display": "90",
+            "color": "#009E3A",
+            "aqi": 90,
+            "display_name": "BreezoMeter AQI",
+            "category": "Excellent air quality"
+          }
+        }
+      },
+      "co": {
+        "full_name": "Carbon monoxide",
+        "concentration": {
+          "units": "ppb",
+          "value": 197.64
+        },
+        "display_name": "CO",
+        "aqi_information": {
+          "baqi": {
+            "aqi_display": "99",
+            "color": "#009E3A",
+            "aqi": 99,
+            "display_name": "BreezoMeter AQI",
+            "category": "Excellent air quality"
+          }
+        }
+      }
+    }
+  },
+  "error": null
+}

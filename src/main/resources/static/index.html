@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AirQuality</title>
+</head>
+<body>
+<h1>Air quality and forecast</h1>
+<form>
+    <fieldset>
+        <legend>Selecione uma cidade:</legend>
+            <select id="mySelect" onchange="getInfo()">
+                <option value="" selected="selected"></option>
+                <option value="Aveiro">Aveiro</option>
+                <option value="Beja">Beja</option>
+                <option value="Braga">Braga</option>
+                <option value="Bragança">Bragança</option>
+                <option value="Castelo Branco">Castelo Branco</option>
+                <option value="Coimbra">Coimbra</option>
+                <option value="Évora">Évora</option>
+                <option value="Faro">Faro</option>
+                <option value="Guarda">Guarda</option>
+                <option value="Leiria">Leiria</option>
+                <option value="Lisboa">Lisboa</option>
+                <option value="Portalegre">Portalegre</option>
+                <option value="Porto">Porto</option>
+                <option value="Santarém">Santarém</option>
+                <option value="Setúbal">Setúbal</option>
+                <option value="Viana do Castelo">Viana do Castelo</option>
+                <option value="Vila Real">Vila Real</option>
+                <option value="Viseu">Viseu</option>
+                <option value="Funchal">Funchal</option>
+                <option value="Porto Santo">Porto Santo</option>
+                <option value="Ponta Delgada">Ponta Delgada</option>
+                <option value="Angra do Heroísmo">Angra do Heroísmo</option>
+                <option value="Horta">Horta</option>
+                <option value="Santa Cruz das Flores">Santa Cruz das Flores</option>
+            </select>
+    </fieldset>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function getInfo() {
+        var city = document.getElementById("mySelect").value;
+        if (city.toString().length == 0){
+            var x = document.getElementById("myDIV");
+            x.style.display = "none";
+        }
+        else{
+            var weatherData;
+            $.ajax({
+                async: false,
+                type: 'GET',
+                crossDomain: false,
+                url: 'http://127.0.0.1:8080/airquality/' + city.toString(),
+                success: function (data) {
+                    weatherData = data;
+                }
+            });
+
+            console.table(weatherData);
+        }
+
+    }
+
+
+</script>
+</body>
+
+
+</html>
