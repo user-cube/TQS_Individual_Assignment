@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 import java.io.FileReader;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class CacheTest {
 
@@ -143,6 +145,7 @@ class CacheTest {
         cache.put("AVEIRO", "AVEIRO");
         TimeUnit.MILLISECONDS.sleep(20000);
         cache.cleanup();
-        System.out.println(cache.size());
+        assertFalse(cache.containsKey("AVEIRO"));
+        assertEquals(0, cache.size());
     }
 }
