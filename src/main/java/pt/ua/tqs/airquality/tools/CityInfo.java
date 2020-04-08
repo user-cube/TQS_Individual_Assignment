@@ -38,9 +38,9 @@ public class CityInfo {
                 .get(JSONObject.class);
         List codes = (List) data.get("data");
         for (int i = 0; i< codes.size();i++){
-            LinkedHashMap mapa = (LinkedHashMap) codes.get(i);
-            if (mapa.get("local").equals(city)){
-                return mapa.get("globalIdLocal")+"";
+            LinkedHashMap codeMap = (LinkedHashMap) codes.get(i);
+            if (codeMap.get("local").equals(city)){
+                return codeMap.get("globalIdLocal")+"";
             }
 
         }
