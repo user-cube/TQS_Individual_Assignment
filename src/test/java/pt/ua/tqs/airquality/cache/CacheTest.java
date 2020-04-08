@@ -141,11 +141,11 @@ class CacheTest {
      * If we invoke the method we
      * should clean our cache.
      */
-    public void cleanupCache() throws InterruptedException {
+    public void cleanupCacheTest() throws InterruptedException {
         cache.put("AVEIRO", "AVEIRO");
         TimeUnit.MILLISECONDS.sleep(20000);
         cache.cleanup();
-        TimeUnit.MILLISECONDS.sleep(20000);
+        TimeUnit.MILLISECONDS.sleep(100);
         assertFalse(cache.containsKey("AVEIRO"));
         assertEquals(0, cache.size());
     }
