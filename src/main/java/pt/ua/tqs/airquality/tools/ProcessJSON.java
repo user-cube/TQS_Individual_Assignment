@@ -16,7 +16,7 @@ public class ProcessJSON {
         JSONObject json;
         try {
             json = (JSONObject) new JSONParser().parse(data);
-        } catch (ParseException exception) {
+        } catch (Exception exception) {
             Logger.getLogger(BreezoMeterService.class.getName()).log(Level.SEVERE, null, exception);
             return null;
         }
