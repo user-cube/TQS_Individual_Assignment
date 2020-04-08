@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pt.ua.tqs.airquality.services.CacheService;
-import pt.ua.tqs.airquality.tools.CityInfo;
 import pt.ua.tqs.airquality.tools.ProcessJSON;
 
 @RestController
@@ -19,12 +18,10 @@ import pt.ua.tqs.airquality.tools.ProcessJSON;
 public class ForecastController {
 
     private final CacheService cacheService;
-    private CityInfo cityInfo;
     private ProcessJSON processJSON;
 
-    public ForecastController(CacheService cacheService, CityInfo cityInfo, ProcessJSON processJSON) {
+    public ForecastController(CacheService cacheService, ProcessJSON processJSON) {
         this.cacheService = cacheService;
-        this.cityInfo = cityInfo;
         this.processJSON = processJSON;
     }
 
