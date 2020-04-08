@@ -11,16 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pt.ua.tqs.airquality.entities.CitiesCoordinates;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 @RestController
 @RequestMapping("/coordinates")
 public class CoordinatesController {
-    @ApiOperation(value = "List all coordinates.", response = Iterable.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -28,15 +25,6 @@ public class CoordinatesController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @GetMapping(value = "/")
-    public ResponseEntity listAllCoordinates() {
-        List cities = new ArrayList();
-        for (CitiesCoordinates city : CitiesCoordinates.values()) {
-            cities.add(city.toString());
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(cities);
-    }
-
     @ApiOperation(value = "Get latitude and longitude by city.", response = Iterable.class)
     @GetMapping(value = "/{city}")
     public ResponseEntity coordinatesByCity(@PathVariable("city") String city) {

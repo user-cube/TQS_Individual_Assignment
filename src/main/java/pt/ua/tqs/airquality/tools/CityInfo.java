@@ -26,7 +26,6 @@ public class CityInfo {
             coordinates[0] = CitiesCoordinates.valueOf(cityName + "_LAT").toString();
             coordinates[1] = CitiesCoordinates.valueOf(cityName + "_LONG").toString();
         } catch (Exception exception){
-            System.err.println(exception);
             Logger.getLogger(BreezoMeterService.class.getName()).log(Level.SEVERE, null, exception);
             return null;
         }

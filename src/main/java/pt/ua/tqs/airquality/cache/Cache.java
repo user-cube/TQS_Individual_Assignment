@@ -1,13 +1,17 @@
 package pt.ua.tqs.airquality.cache;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.apache.commons.collections.MapIterator;
 import org.apache.commons.collections.map.LRUMap;
+import pt.ua.tqs.airquality.services.BreezoMeterService;
 
 public class Cache<K, T> {
 
     private long timeToLive;
-    private LRUMap cacheMap;
+    private final LRUMap cacheMap;
 
     public Cache(long cacheTimeToLive, final long timerInterval, int maxItems) {
         this.timeToLive = cacheTimeToLive * 1000;
@@ -20,12 +24,12 @@ public class Cache<K, T> {
                 while (true) {
                     try {
                         Thread.sleep(timerInterval * 1000);
-                    } catch (InterruptedException ex) {
+                    } catch (InterruptedException exception) {
+                        Logger.getLogger(BreezoMeterService.class.getName()).log(Level.SEVERE, null, exception);
                     }
                     cleanup();
                 }
             });
-
             t.setDaemon(true);
             t.start();
         }
@@ -37,16 +41,15 @@ public class Cache<K, T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public T get(K key) {
         synchronized (cacheMap) {
-            CacheObject c = (CacheObject) cacheMap.get(key);
+            CacheObject cacheObject = (CacheObject) cacheMap.get(key);
 
-            if (c == null)
+            if (cacheObject == null)
                 return null;
             else {
-                c.lastAccessed = System.currentTimeMillis();
-                return c.value;
+                cacheObject.lastAccessed = System.currentTimeMillis();
+                return cacheObject.value;
             }
         }
     }
@@ -82,13 +85,13 @@ public class Cache<K, T> {
 
             deleteKey = new ArrayList<>((cacheMap.size() / 2) + 1);
             K key;
-            CacheObject c;
+            CacheObject cacheObject;
 
             while (itr.hasNext()) {
                 key = (K) itr.next();
-                c = (CacheObject) itr.getValue();
+                cacheObject = (CacheObject) itr.getValue();
 
-                if (c != null && (now > (timeToLive + c.lastAccessed))) {
+                if (cacheObject != null && (now > (timeToLive + cacheObject.lastAccessed))) {
                     deleteKey.add(key);
                 }
             }
@@ -98,7 +101,6 @@ public class Cache<K, T> {
             synchronized (cacheMap) {
                 cacheMap.remove(key);
             }
-
             Thread.yield();
         }
     }
@@ -106,7 +108,6 @@ public class Cache<K, T> {
     protected class CacheObject {
         public long lastAccessed = System.currentTimeMillis();
         public T value;
-
         protected CacheObject(T value) {
             this.value = value;
         }
