@@ -32,7 +32,7 @@ class CacheTest {
 
     @BeforeEach
     public void setUp() {
-        cache = new Cache(20, 20, 2);
+        cache = new Cache(10, 10, 2);
     }
 
     @Test
@@ -142,10 +142,10 @@ class CacheTest {
      * should clean our cache.
      */
     public void cleanupCacheTest() throws InterruptedException {
-        cache.put("AVEIRO", "AVEIRO");
+        cache.put("AVEIRO", processJson());
         TimeUnit.MILLISECONDS.sleep(20000);
         cache.cleanup();
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(20000);
         assertFalse(cache.containsKey("AVEIRO"));
         assertEquals(0, cache.size());
     }
