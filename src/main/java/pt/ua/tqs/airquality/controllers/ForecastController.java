@@ -25,19 +25,16 @@ public class ForecastController {
         this.processJSON = processJSON;
     }
 
-    @ApiOperation(value = ".", response = Iterable.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+    @ApiOperation(value = "Get weather forecast for the next five day by city.", response = Iterable.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-    }
-    )
-    @GetMapping(value="/{city}")
-    public ResponseEntity getAirConditions(@PathVariable("city") String city){
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+    @GetMapping(value = "/{city}")
+    public ResponseEntity getAirConditions(@PathVariable("city") String city) {
         JSONObject json;
         String data = cacheService.getForecast(city);
-        if ( data == null){
+        if (data == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         json = processJSON.processJSON(data);
