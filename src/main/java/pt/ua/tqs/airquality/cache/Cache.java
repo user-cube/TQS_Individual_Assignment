@@ -26,6 +26,7 @@ public class Cache<K, T> {
                         Thread.sleep(timerInterval * 1000);
                     } catch (InterruptedException exception) {
                         Logger.getLogger(BreezoMeterService.class.getName()).log(Level.SEVERE, null, exception);
+                        Thread.currentThread().interrupt();
                     }
                     cleanup();
                 }

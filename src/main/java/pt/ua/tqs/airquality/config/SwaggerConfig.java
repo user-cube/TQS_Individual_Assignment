@@ -23,7 +23,7 @@ public class SwaggerConfig {
                 .apiInfo(metaData());
     }
     private ApiInfo metaData() {
-        ApiInfo apiInfo = new ApiInfo(
+        return new ApiInfo(
                 "Air Quality",
                 "A multi-layer web application, in Spring Boot, supplied with automated tests.",
                 "1.0",
@@ -31,6 +31,5 @@ public class SwaggerConfig {
                 new Contact("Rui Coelho", "https://ruicoelho.pt/", "ruicoelho@ua.pt"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0");
-        return apiInfo;
     }
 }

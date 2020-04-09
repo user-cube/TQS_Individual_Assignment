@@ -10,6 +10,7 @@ public class CacheService {
 
     private final BreezoMeterService breezometerService;
     private final IPMAService ipmaService;
+    private static final String FORECAST = "FORECAST";
 
     public CacheService(BreezoMeterService breezometerService, IPMAService ipmaService){
         this.cache = new Cache(20,20,15);
@@ -25,15 +26,15 @@ public class CacheService {
     }
 
     public String getForecast(String city){
-        if (!cache.containsKey(city+"FORECAST")){
+        if (!cache.containsKey(city+ FORECAST)){
             JSONObject json = ipmaService.getForecast(city);
             if ( json == null){
                 return null;
             } else {
-                cache.put(city + "FORECAST", json);
+                cache.put(city + FORECAST, json);
             }
         }
-        return cache.get(city+"FORECAST").toString();
+        return cache.get(city+ FORECAST).toString();
     }
 
 }

@@ -2,7 +2,6 @@ package pt.ua.tqs.airquality.tools;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import pt.ua.tqs.airquality.services.BreezoMeterService;
 
