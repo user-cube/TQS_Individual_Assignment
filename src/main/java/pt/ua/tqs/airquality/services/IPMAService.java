@@ -30,7 +30,7 @@ public class IPMAService {
                     .get(JSONObject.class);
             return data;
         } catch (Exception exception){
-            Logger.getLogger(BreezoMeterService.class.getName()).log(Level.SEVERE, null, exception);
+            Logger.getLogger(IPMAService.class.getName()).log(Level.SEVERE, null, exception);
             return null;
         }
     }
