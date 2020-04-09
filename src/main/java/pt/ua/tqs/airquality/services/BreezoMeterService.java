@@ -25,5 +25,4 @@ public class BreezoMeterService {
                 .get(JSONObject.class);
         return data;
     }
-
 }
