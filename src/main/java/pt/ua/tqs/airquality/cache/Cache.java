@@ -107,8 +107,8 @@ public class Cache<K, T> {
     }
 
     protected class CacheObject {
-        public long lastAccessed = System.currentTimeMillis();
-        public T value;
+        private long lastAccessed = System.currentTimeMillis();
+        private T value;
         protected CacheObject(T value) {
             this.value = value;
         }
