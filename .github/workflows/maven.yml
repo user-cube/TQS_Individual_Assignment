@@ -20,5 +20,5 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Maven
-        env: BREEZOMETER_KEY=e5c3a4bbfda4433eaaf91581c5a175e3
+        env: BREEZOMETER_KEY: e5c3a4bbfda4433eaaf91581c5a175e3
         run: mvn -B package --file pom.xml
