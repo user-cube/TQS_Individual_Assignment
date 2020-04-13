@@ -16,7 +16,7 @@ public class BreezoMeterService {
     public JSONObject getAirConditions(String latitude, String longitude) {
         return client.target("https://api.breezometer.com/air-quality/v2/current-conditions?" + "lat=" + latitude +
                         "&lon=" + longitude +
-                        "&key=e5c3a4bbfda4433eaaf91581c5a175e3" +
+                        "&key=" + System.getenv("BREEZOMETER_KEY") +
                         "&features=breezometer_aqi,local_aqi,pollutants_concentrations,pollutants_aqi_information").request(MediaType.APPLICATION_JSON).get(JSONObject.class);
     }
 }
