@@ -3,3 +3,10 @@
 
 ## Author
 * [Rui Coelho](https://github.com/user-cube)
+
+## Repositories
+* [Frontend](https://github.com/user-cube/airquality-frontend)
+* [Backend](https://github.com/user-cube/TQS_Individual_Assignment)
+
+## Video
+* [Available on YouTube](https://www.youtube.com/watch?v=1N7j14sh9ag)
