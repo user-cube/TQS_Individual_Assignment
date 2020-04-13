@@ -50,8 +50,10 @@ class IPMAServiceTest {
     @Test
     public void getForecastForNonExistingCityTest(){
         Mockito.when(cityInfo.getCityCode("Aveiras", cityURL )).thenReturn(String.valueOf(1213421412));
-        if (getAndStore("Aveiras"))
+        if (getAndStore("Aveiras")) {
             assertEquals(null, ipmaService.getForecast("Aveiras"));
+            assertThrows(Exception.class, ()-> ipmaService.getForecast("Aveiras"));
+        }
     }
 
     public Boolean getAndStore(String city){

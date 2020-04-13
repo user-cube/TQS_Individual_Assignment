@@ -22,6 +22,7 @@
 
 
     <dependencies>
+        <!--Swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -72,22 +73,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <version>2.2.6.RELEASE</version>
-        </dependency>
-
-        <!-- selenium -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <type>jar</type>
-        </dependency>
-
-        <!-- selenium / junit integration -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>selenium-jupiter</artifactId>
-            <version>3.2.0</version>
-            <scope>test</scope>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -144,6 +129,7 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
+
         <!--Dependency for cache-->
         <dependency>
             <groupId>commons-collections</groupId>
